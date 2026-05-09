@@ -304,40 +304,40 @@ export default function Page() {
       </header>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-8 py-8 flex flex-col flex-grow w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 flex-grow">
+        <div className="flex flex-col md:flex-row gap-8 md:gap-12 flex-grow">
           
           {/* LEFT COLUMN: Input Section */}
-          <div className="lg:col-span-5 flex flex-col h-full lg:min-h-[600px]">
+          <div className="w-full md:w-5/12 flex flex-col h-full md:min-h-[600px]">
             <div className="mb-6">
-              <h2 className="text-xs uppercase tracking-[0.3em] font-bold text-yellow-400 mb-2">Assess Business Health</h2>
-              <p className="text-white/60 leading-relaxed text-sm">
+              <h2 className="text-sm md:text-base uppercase tracking-[0.3em] font-bold text-yellow-400 mb-2">Assess Business Health</h2>
+              <p className="text-white/60 leading-relaxed text-base md:text-lg">
                 Paste conversational updates or interview notes from the merchant. Our AI will instantly structure the data into an actionable credit profile.
               </p>
             </div>
 
             <div className="flex-grow bg-white/5 p-6 border border-white/20 flex flex-col">
               <div className="flex justify-between items-center mb-4">
-                <label htmlFor="business-update" className="block text-[10px] uppercase font-bold text-white/50 tracking-widest">
+                <label htmlFor="business-update" className="block text-xs md:text-sm uppercase font-bold text-white/50 tracking-widest">
                   Merchant Update (Voice-to-Text or Chat)
                 </label>
-                <div className="flex gap-2">
+                <div className="flex gap-3">
                   <button 
                     onClick={handleMicrophoneClick}
-                    className={`p-2 rounded-full border transition-colors ${
+                    className={`h-14 w-14 flex items-center justify-center rounded-full border transition-colors ${
                       isRecording 
                         ? 'border-red-500 bg-red-500/20 text-red-500 animate-pulse' 
                         : 'border-white/20 hover:border-yellow-400 hover:text-yellow-400 text-white/60'
                     }`}
                     title={isRecording ? 'Stop Recording' : 'Start Voice Input'}
                   >
-                    <Mic size={16} />
+                    <Mic size={24} />
                   </button>
                   <button 
                     onClick={handleImageUploadClick}
-                    className="p-2 rounded-full border border-white/20 hover:border-yellow-400 hover:text-yellow-400 text-white/60 transition-colors"
+                    className="h-14 w-14 flex items-center justify-center rounded-full border border-white/20 hover:border-yellow-400 hover:text-yellow-400 text-white/60 transition-colors"
                     title="Upload Image"
                   >
-                    <ImageIcon size={16} />
+                    <ImageIcon size={24} />
                   </button>
                   <input 
                     type="file" 
@@ -364,20 +364,20 @@ export default function Page() {
 
               <textarea
                 id="business-update"
-                className="w-full flex-grow min-h-[200px] bg-[#0A0A0A] border border-white/20 text-white p-4 focus:outline-none focus:border-yellow-400 focus:ring-0 placeholder:text-white/30 resize-none font-mono text-sm leading-relaxed"
+                className="w-full flex-grow min-h-[200px] bg-[#0A0A0A] border border-white/20 text-white p-4 focus:outline-none focus:border-yellow-400 focus:ring-0 placeholder:text-white/30 resize-none font-mono text-base md:text-lg leading-relaxed"
                 placeholder="e.g., Market dey move well well. I sell phone accessories for Sagamu. Yesterday I make 50k..."
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
               />
 
               <div className="mt-6 flex flex-col gap-3">
-                <p className="text-[10px] uppercase font-bold text-white/50 tracking-widest">Try an example</p>
+                <p className="text-xs md:text-sm uppercase font-bold text-white/50 tracking-widest">Try an example</p>
                 <div className="flex flex-wrap gap-2">
                   {EXAMPLES.map((ex, i) => (
                     <button
                       key={i}
                       onClick={() => setInputText(ex.text)}
-                      className="text-[10px] bg-transparent border border-white/20 hover:border-yellow-400 hover:text-yellow-400 text-white/60 uppercase font-bold tracking-widest px-3 py-1.5 transition-all text-left"
+                      className="text-xs md:text-sm h-14 flex items-center bg-transparent border border-white/20 hover:border-yellow-400 hover:text-yellow-400 text-white/60 uppercase font-bold tracking-widest px-4 py-2 transition-all text-left"
                     >
                       {ex.label}
                     </button>
@@ -389,16 +389,16 @@ export default function Page() {
             <button
               onClick={handleAnalyze}
               disabled={isAnalyzing || (!inputText.trim() && !imageData)}
-              className="mt-6 w-full bg-white hover:bg-yellow-400 disabled:bg-white/10 disabled:text-white/30 text-black font-black uppercase tracking-widest py-4 flex items-center justify-center gap-2 transition-colors cursor-pointer disabled:cursor-not-allowed"
+              className="mt-6 w-full h-16 min-h-[64px] bg-white hover:bg-yellow-400 disabled:bg-white/10 disabled:text-white/30 text-black font-black uppercase tracking-widest text-lg py-4 flex items-center justify-center gap-2 transition-colors cursor-pointer disabled:cursor-not-allowed"
             >
               {isAnalyzing ? (
                 <>
-                  <RefreshCw className="animate-spin" size={16} />
+                  <RefreshCw className="animate-spin" size={20} />
                   Analyzing Profile...
                 </>
               ) : (
                 <>
-                  <Activity size={16} />
+                  <Activity size={20} />
                   Generate Oja-Score
                 </>
               )}
@@ -413,7 +413,7 @@ export default function Page() {
           </div>
 
           {/* RIGHT COLUMN: Output Profile */}
-          <div className="lg:col-span-7 flex flex-col">
+          <div className="w-full md:w-7/12 flex flex-col">
             <AnimatePresence mode="wait">
               {!result && !isAnalyzing && (
                 <motion.div
@@ -458,36 +458,36 @@ export default function Page() {
                   {/* Critical Ledger Container */}
                   <div className="bg-white text-black p-6 sm:p-8 flex flex-col sm:flex-row justify-between flex-grow">
                     
-                    <div className="flex flex-col mb-8 sm:mb-0 max-w-[50%]">
+                    <div className="flex flex-col mb-8 sm:mb-0 w-full sm:max-w-[50%]">
                       <div className="mb-8">
-                        <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-black/50 mb-2 border-b-2 border-black/10 pb-2">Oja-Score</p>
+                        <p className="text-xs uppercase tracking-[0.2em] font-bold text-black/50 mb-2 border-b-2 border-black/10 pb-2">Oja-Score</p>
                         <div className="text-[80px] sm:text-[100px] font-black leading-[0.85] tracking-tighter" style={{ color: getScoreColor(result.risk_profile.score) }}>
                           {result.risk_profile.score}
                         </div>
                         <div className="flex gap-4 mt-4 items-center">
-                          <span className={`px-2 md:px-3 py-1 font-black text-[10px] sm:text-xs tracking-widest uppercase ${getStatusColor(result.risk_profile.status)}`}>
+                          <span className={`px-3 py-1 font-black text-xs sm:text-sm tracking-widest uppercase ${getStatusColor(result.risk_profile.status)}`}>
                             {result.risk_profile.status}
                           </span>
                         </div>
                       </div>
 
                       <div>
-                         <h3 className="text-xs font-black uppercase tracking-[0.2em] border-b-2 border-black pb-2 mb-4">Core Metrics</h3>
+                         <h3 className="text-sm font-black uppercase tracking-[0.2em] border-b-2 border-black pb-2 mb-4">Core Metrics</h3>
                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                            <div>
-                             <p className="text-[10px] uppercase font-bold text-black/50 mb-1 tracking-widest">Est. Monthly Rev</p>
+                             <p className="text-xs uppercase font-bold text-black/50 mb-1 tracking-widest">Est. Monthly Rev</p>
                              <p className="text-xl sm:text-2xl font-black">{formatNaira(result.financial_metrics.est_monthly_revenue)}</p>
                            </div>
                            <div>
-                             <p className="text-[10px] uppercase font-bold text-black/50 mb-1 tracking-widest">Net Profit</p>
+                             <p className="text-xs uppercase font-bold text-black/50 mb-1 tracking-widest">Net Profit</p>
                              <p className="text-xl sm:text-2xl font-black text-green-600">{formatNaira(result.financial_metrics.est_net_profit)}</p>
                            </div>
                            <div>
-                             <p className="text-[10px] uppercase font-bold text-black/50 mb-1 tracking-widest">Monthly Ajo</p>
+                             <p className="text-xs uppercase font-bold text-black/50 mb-1 tracking-widest">Monthly Ajo</p>
                              <p className="text-xl sm:text-2xl font-black">{formatNaira(result.financial_metrics.ajo_contribution_monthly)}</p>
                            </div>
                            <div>
-                             <p className="text-[10px] uppercase font-bold text-black/50 mb-1 tracking-widest">Burn Rate</p>
+                             <p className="text-xs uppercase font-bold text-black/50 mb-1 tracking-widest">Burn Rate</p>
                              <p className="text-xl sm:text-2xl font-black text-red-600">{result.financial_metrics.burn_rate_percent}%</p>
                            </div>
                          </div>
@@ -499,10 +499,10 @@ export default function Page() {
                         <p className="text-sm font-black uppercase tracking-widest border-black pb-2 border-b-2 mb-4">Risk Profile</p>
                         
                         <div className="mb-4">
-                           <p className="text-[10px] uppercase font-bold text-black/50 mb-2 tracking-widest">Strengths</p>
+                           <p className="text-xs uppercase font-bold text-black/50 mb-2 tracking-widest">Strengths</p>
                            <ul className="space-y-2">
                             {result.risk_profile.strengths.map((str, idx) => (
-                              <li key={idx} className="flex gap-2 text-xs font-bold leading-tight">
+                              <li key={idx} className="flex gap-2 text-sm md:text-base font-bold leading-tight">
                                 <span className="text-green-600 font-black">+</span>
                                 {str}
                               </li>
@@ -514,10 +514,10 @@ export default function Page() {
                         </div>
 
                         <div>
-                           <p className="text-[10px] uppercase font-bold text-black/50 mb-2 tracking-widest">Risk Factors</p>
+                           <p className="text-xs uppercase font-bold text-black/50 mb-2 tracking-widest">Risk Factors</p>
                            <ul className="space-y-2">
                             {result.risk_profile.top_risks.map((risk, idx) => (
-                              <li key={idx} className="flex gap-2 text-xs font-bold leading-tight">
+                              <li key={idx} className="flex gap-2 text-sm md:text-base font-bold leading-tight">
                                 <span className="text-red-500 font-black">-</span>
                                 {risk}
                               </li>
@@ -533,7 +533,7 @@ export default function Page() {
 
                   {/* Bottom Recommendation Bar */}
                   <div className="bg-yellow-400 text-black p-6 border-l-8 border-black flex flex-col justify-between h-auto mt-auto">
-                    <p className="text-[10px] uppercase tracking-[0.2em] font-black opacity-60 mb-2">Next Best Action</p>
+                    <p className="text-xs uppercase tracking-[0.2em] font-black opacity-60 mb-2">Next Best Action</p>
                     <p className="text-sm sm:text-base font-bold leading-relaxed">{result.insights.next_best_action}</p>
                   </div>
                 </motion.div>
